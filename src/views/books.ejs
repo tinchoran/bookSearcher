@@ -1,0 +1,51 @@
+
+    <main class="container">
+
+        <div class="cards-container">
+            <% view.items.forEach(book => { %>
+                <div class="cell">
+                    <div class="card">
+                        <picture class="card__img-container">
+                            <% if (book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.smallThumbnail) { %>
+                                <img src='<%=book.volumeInfo.imageLinks.smallThumbnail%>' class="card__img" alt="Imagen del libro <%=book.volumeInfo.title%>" loading="lazy">
+                            <% } else {%>
+                                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png" alt="Imagen no encontrada" class="card__img" loading="lazy">
+                            <% } %>
+                        </picture>
+                        <div class="card__body">
+                            <h5 class="card__title"><b><%= book.volumeInfo.title %></b></h5>
+                            <% if (book.volumeInfo.subtitle) { %>
+                                <p class="card__subtitle"><%=book.volumeInfo.subtitle%></p>
+                            <%}%>
+                            <p class="card__text">
+                                <small class="text-body-secondary">
+                                    <b>Autor/es: </b>
+                                        <% if (book.volumeInfo.authors) { %>
+                                            <!-- <% book.volumeInfo.authors.forEach(autor => { %>
+                                                <span>
+                                                    <%=autor%> 
+                                                    <br>
+                                                </span>
+                                            <% })%> -->
+                                            <span><%= book.volumeInfo.authors[0] %></span>
+                                        <% } else {%>
+                                            <span>Unknown</span>
+                                        <% } %>
+                                </small>
+                            </p>
+                            <p class="card__text">
+                                <small class="text-body-secondary"><b>Editorial: </b><%=book.volumeInfo.publisher%></small>
+                            </p>
+                            <a href="/search/books/<%=book.id%>" class="btn btn-primary">Ver más ></a>
+                            <small class="text-body-secondary card__date">
+                                <b><%=new Date(book.volumeInfo.publishedDate).getFullYear() || book.volumeInfo.publishedDate%></b>
+                            </small>
+                        </div>
+                    </div>
+                </div>
+
+            <% }) %>
+        </div>
+
+
+    </main>
