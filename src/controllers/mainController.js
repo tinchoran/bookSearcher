@@ -5,8 +5,9 @@ const service = require("../services/searchService");
 module.exports = {
     home: async (req, res) => {
         return res.render("home", {
-            layout: "layouts/main",
-            styles: []
+            styles: ["/styles/home.css"],
+            layout: "layouts/home",
+            title: "Book Searcher"
         });
     },
 
@@ -33,6 +34,7 @@ module.exports = {
                 view: {
                     items: result.items
                 },
+                title: "Library | " + keyword,
                 styles: ["/styles/books.css"],
                 layout: "layouts/main"
             });
@@ -55,6 +57,7 @@ module.exports = {
                 view: {
                     info: result,
                 },
+                title: result.volumeInfo.title,
                 styles: ["/styles/book.css"]
             });
         }

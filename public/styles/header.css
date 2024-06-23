@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Playwrite+ES:wght@100..400&display=swap');
+
+.navbar__title{
+    font-family: "Playwrite ES", cursive;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    color: rgb(85, 85, 193);
+}
+
+.navbar-brand{
+    transition: .5s;
+}
+
+.navbar-brand:hover{
+    color: grey;
+}
