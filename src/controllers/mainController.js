@@ -1,9 +1,10 @@
 require("dotenv").config();
 const service = require("../services/searchService");
 
+
 module.exports = {
     home: async (req, res) => {
-        res.render("home", {
+        return res.render("home", {
             layout: "layouts/main",
             styles: []
         });
@@ -20,15 +21,15 @@ module.exports = {
         if (result.isError) {
             
             console.log(result.msg);
-            res.send("Hubo un error");
+            return res.send("Hubo un error");
 
         } else if (result.totalItems === 0) {
 
-            res.send("No se encontró ningún libro");
+            return res.send("No se encontró ningún libro");
 
         } else {
 
-            res.render("books", {
+            return res.render("books", {
                 view: {
                     items: result.items
                 },
@@ -46,9 +47,16 @@ module.exports = {
 
         if (result.isError) {
             console.log(result.msg);
-            res.status(400).send(result.msg);
+            return res.status(400).send(result.msg);
         } else {
-            res.send(result);
+
+            return res.render("book", {
+                layout: "layouts/main",
+                view: {
+                    info: result,
+                },
+                styles: ["/styles/book.css"]
+            });
         }
     }
 };

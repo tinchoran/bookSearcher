@@ -1,0 +1,66 @@
+<main class="container">
+    <div class="card__container">
+        <div class="book__presentation">
+            <h1 class="presentation__title"><%=view.info.volumeInfo.title%></h1>
+            <picture class="presentation__img-container">
+                <% if (view.info.volumeInfo.imageLinks && (view.info.volumeInfo.imageLinks.thumbnail || view.info.volumeInfo.imageLinks.smallThumbnail )) { %>
+                    <img src='<%=view.info.volumeInfo.imageLinks.thumbnail || view.info.volumeInfo.imageLinks.smallThumbnail%>' class="card__img" alt="Imagen del libro <%=view.info.volumeInfo.title%>" >
+                <% } else {%>
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png" alt="Imagen no encontrada" class="card__img" >
+                <% } %>
+            </picture>
+            <div class="presentation__info">
+                <% if (view.info.volumeInfo.subtitle) { %>
+                    <h4 class="presentation__subtitle"><%=view.info.volumeInfo.subtitle%></h4>
+                <% } %>
+                <% if (view.info.volumeInfo.categories) { %>
+                    <p class="presentation__text">
+                        <b>Categorías: </b>
+                        <% view.info.volumeInfo.categories.forEach(category => { %>
+                            <span><%=category%></span>
+                        <% }) %>
+                    </p>
+                <% } %>
+                <% if (view.info.volumeInfo.authors) { %>
+                    <p class="presentation__text">
+                        <b>Autor: </b>
+                        <% view.info.volumeInfo.authors.forEach(author => { %>
+                            <span><%= author %></span>
+                        <% }) %>
+                    </p>
+                <% } %>
+                <% if (view.info.volumeInfo.publisher) { %>
+                    <p class="presentation__text">
+                        <b>Editorial: </b>
+                        <%=view.info.volumeInfo.publisher%>
+                    </p>
+                <% } %>
+                <% if (view.info.volumeInfo.publishedDate) { %>
+                    <p class="presentation__text">
+                        <b>Fecha de publicación: </b>
+                        <%=view.info.volumeInfo.publishedDate%>
+                    </p>
+                <% } %>
+                <% if (view.info.volumeInfo.pageCount) { %>
+                    <p class="presentation__text">
+                        <b>Cantidad de páginas: </b>
+                        <%=view.info.volumeInfo.pageCount%>
+                    </p>
+                <% } %>
+            </div>
+        </div>
+        <div class="book__info">
+            <h2 class="info__title">Descripción</h2>
+
+            <%- view.info.volumeInfo.description %>
+            <div class="info__btns-container">
+                <a class="btn btn-primary" href="<%=view.info.volumeInfo.previewLink%>" role="button" target="_blank">Comprar</a>
+                <% if (view.info.accessInfo && view.info.accessInfo.webReaderLink) { %>
+                    <a class="btn btn-primary" target="_blank"
+                    href="<%=view.info.accessInfo.webReaderLink%>" role="button">Leer eBook</a>
+                <% } %>
+            </div>
+        </div>
+
+    </div>
+</main>
