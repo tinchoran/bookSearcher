@@ -1,0 +1,12 @@
+.loader__container{
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: rgba(227, 226, 224, 0.201);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 99;
+}

@@ -1,9 +1,10 @@
 .container{
-    padding: 4rem 0;
+    padding: 3rem 0;
     display: flex;
     flex-direction: column;
-    gap: 4rem;
+    gap: 1rem;
     align-items: center;
+    z-index:1;
 }
 
 
@@ -57,3 +58,23 @@ img{
     right: 1rem;
     font-size: .8rem;
 }
+
+
+.img__container{
+    width: 50%;
+    padding:0;
+}
+
+.notFound__img{
+    
+    filter: drop-shadow(1px 1px 3px rgb(106, 168, 255));
+}
+
+
+
+.results__info{
+    font-size: .9rem;
+    text-align: left;
+    width: 100%;
+}
+

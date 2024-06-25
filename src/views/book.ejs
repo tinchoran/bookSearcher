@@ -6,7 +6,7 @@
                 <% if (view.info.volumeInfo.imageLinks && (view.info.volumeInfo.imageLinks.thumbnail || view.info.volumeInfo.imageLinks.smallThumbnail )) { %>
                     <img src='<%=view.info.volumeInfo.imageLinks.thumbnail || view.info.volumeInfo.imageLinks.smallThumbnail%>' class="card__img" alt="Imagen del libro <%=view.info.volumeInfo.title%>" >
                 <% } else {%>
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png" alt="Imagen no encontrada" class="card__img" >
+                    <img src='/img/img_placeholder.png' class="card__img" alt="Portada del libro <%=view.info.volumeInfo.title%> no encontrada" style="height:250px;width:auto;">
                 <% } %>
             </picture>
             <div class="presentation__info">
@@ -64,3 +64,9 @@
 
     </div>
 </main>
+
+
+<script>
+    const $loaderContainer = document.querySelector(".loader__container");
+
+</script>

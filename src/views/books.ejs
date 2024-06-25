@@ -1,51 +1,84 @@
 
-    <main class="container">
+    <main class="container" style="min-height: 80vh;">
 
-        <div class="cards-container">
-            <% view.items.forEach(book => { %>
-                <div class="cell">
-                    <div class="card">
-                        <picture class="card__img-container">
-                            <% if (book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.smallThumbnail) { %>
-                                <img src='<%=book.volumeInfo.imageLinks.smallThumbnail%>' class="card__img" alt="Imagen del libro <%=book.volumeInfo.title%>" loading="lazy">
-                            <% } else {%>
-                                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png" alt="Imagen no encontrada" class="card__img" loading="lazy">
-                            <% } %>
-                        </picture>
-                        <div class="card__body">
-                            <h5 class="card__title"><b><%= book.volumeInfo.title %></b></h5>
-                            <% if (book.volumeInfo.subtitle) { %>
-                                <p class="card__subtitle"><%=book.volumeInfo.subtitle%></p>
-                            <%}%>
-                            <p class="card__text">
-                                <small class="text-body-secondary">
-                                    <b>Autor/es: </b>
-                                        <% if (book.volumeInfo.authors) { %>
-                                            <!-- <% book.volumeInfo.authors.forEach(autor => { %>
-                                                <span>
-                                                    <%=autor%> 
-                                                    <br>
-                                                </span>
-                                            <% })%> -->
-                                            <span><%= book.volumeInfo.authors[0] %></span>
-                                        <% } else {%>
-                                            <span>Unknown</span>
-                                        <% } %>
+        <p class="results__info" style="text-align: left;width:100%;">
+            Alrededor de <b><%=view.totalItems%></b> resultados para <b><%= keyword %></b> | Mostrando <%= view.showingItems || 0 %>
+        </p>
+        <% if (view.totalItems == 0) { %>
+            <picture class="img__container">
+                <img class="img-fluid notFound__img" src="/img/good.png" alt="">
+            </picture>
+            
+        <% } %>
+
+        
+        <% if (view.totalItems > 0) { %>
+            <div class="cards-container">
+                <% view.items.forEach(book => { %>
+                    <div class="cell">
+                        <div class="card">
+                            <picture class="card__img-container">
+                                <% if (book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.smallThumbnail) { %>
+                                    <img src='<%=book.volumeInfo.imageLinks.smallThumbnail%>' class="card__img" alt="Imagen del libro <%=book.volumeInfo.title%>" loading="lazy">
+                                <% } else {%>
+                                    <img src="https://upload.wikimedia.org/wikipedia/commons/a/a3/Image-not-found.png" alt="Imagen no encontrada" class="card__img" loading="lazy">
+                                <% } %>
+                            </picture>
+                            <div class="card__body">
+                                <h5 class="card__title"><b><%= book.volumeInfo.title %></b></h5>
+                                <% if (book.volumeInfo.subtitle) { %>
+                                    <p class="card__subtitle"><%=book.volumeInfo.subtitle%></p>
+                                <%}%>
+                                <p class="card__text">
+                                    <small class="text-body-secondary">
+                                        <b>Autor/es: </b>
+                                            <% if (book.volumeInfo.authors) { %>
+                                                <!-- <% book.volumeInfo.authors.forEach(autor => { %>
+                                                    <span>
+                                                        <%=autor%> 
+                                                        <br>
+                                                    </span>
+                                                <% })%> -->
+                                                <span><%= book.volumeInfo.authors[0] %></span>
+                                            <% } else {%>
+                                                <span>Unknown</span>
+                                            <% } %>
+                                    </small>
+                                </p>
+                                <p class="card__text">
+                                    <small class="text-body-secondary"><b>Editorial: </b><%=book.volumeInfo.publisher%></small>
+                                </p>
+                                <a href="/search/books/<%=book.id%>" class="btn btn-primary card__btn">Ver más ></a>
+                                <small class="text-body-secondary card__date">
+                                    <b><%=new Date(book.volumeInfo.publishedDate).getFullYear() || book.volumeInfo.publishedDate%></b>
                                 </small>
-                            </p>
-                            <p class="card__text">
-                                <small class="text-body-secondary"><b>Editorial: </b><%=book.volumeInfo.publisher%></small>
-                            </p>
-                            <a href="/search/books/<%=book.id%>" class="btn btn-primary">Ver más ></a>
-                            <small class="text-body-secondary card__date">
-                                <b><%=new Date(book.volumeInfo.publishedDate).getFullYear() || book.volumeInfo.publishedDate%></b>
-                            </small>
+                            </div>
                         </div>
                     </div>
-                </div>
-
-            <% }) %>
-        </div>
+    
+                <% }) %>
+            </div>
+        <% } %>
+       
 
 
     </main>
+
+
+    <script>
+        const $card__btns = document.querySelectorAll(".card__btn");
+        const $loaderContainer = document.querySelector(".loader__container");
+        $card__btns.forEach(btn => {
+            btn.addEventListener("click", (e) => {
+                $loaderContainer.style.display = "flex";
+            })
+        })
+
+        window.addEventListener('pageshow', function(event) {
+            // Verificar si la página se está mostrando desde la caché del navegador
+            if (event.persisted) {
+                
+                $loaderContainer.style.display = "none";
+            }
+        });
+    </script>

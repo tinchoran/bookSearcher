@@ -7,15 +7,23 @@ module.exports = {
         return res.render("home", {
             styles: ["/styles/home.css"],
             layout: "layouts/home",
-            title: "Book Searcher"
+            title: "Book Searcher",
+            error: false,
         });
     },
 
     search: async (req, res) => {
         const { keyword } = req.query;
         if (!keyword) {
-            return res.send("Debe especificar los parámetros de búsqueda");
+            return res.render("home", {
+                styles: ["/styles/home.css"],
+                layout: "layouts/home",
+                title: "Book Searcher",
+                error: "El campo no puede estar vacío"
+            });
         }
+
+
 
         const result = await service.searchBooks(keyword);
 
@@ -26,15 +34,26 @@ module.exports = {
 
         } else if (result.totalItems === 0) {
 
-            return res.send("No se encontró ningún libro");
+            return res.render("books", {
+                view: {
+                    totalItems: 0
+                },
+                title: "Resultados | No se encontraron libros",
+                keyword,
+                styles: ["/styles/books.css"],
+                layout: "layouts/main"
+            })
 
         } else {
 
             return res.render("books", {
                 view: {
-                    items: result.items
+                    items: result.items,
+                    totalItems: result.totalItems,
+                    showingItems: result.items.length
                 },
-                title: "Library | " + keyword,
+                title: keyword + " | Resultados | ",
+                keyword,
                 styles: ["/styles/books.css"],
                 layout: "layouts/main"
             });
@@ -57,6 +76,7 @@ module.exports = {
                 view: {
                     info: result,
                 },
+                keyword: "",
                 title: result.volumeInfo.title,
                 styles: ["/styles/book.css"]
             });

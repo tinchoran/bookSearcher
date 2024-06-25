@@ -8,9 +8,9 @@
         </svg>
       </a>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <form class="d-flex" role="search" method="get" action="/search/books">
-          <input class="form-control me-2" type="search" name="keyword" placeholder="Title, author, year..." aria-label="Search" autocomplete="off">
-          <button class="btn btn-outline-success" type="submit">Search</button>
+        <form class="d-flex" role="search" method="get" action="/search/books" id="search__form">
+          <input class="form-control me-2" type="search" name="keyword" placeholder="Título, autor, año..." aria-label="Search" autocomplete="off" value="<%=keyword%>">
+          <button class="btn btn-outline-success" type="submit" id="search__btn">Buscar</button>
         </form>
       </div>
       <a class="navbar-brand" href="/" style="display: flex;align-items:center;gap:.5rem;">

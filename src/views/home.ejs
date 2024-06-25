@@ -14,11 +14,27 @@
                 <a href="www.google.com"> Google</a>
                 <br>Busca por título, autor, subtítulo, año de publicación, editorial y más parámetros.
             </p>
-            <form action="/search/books" method="get" class="hero__form">
-                <input class="form-control" type="search" name="keyword" placeholder="Título, autor, año..." aria-label="Search" autocomplete="off">
+            <form action="/search/books" method="get" class="hero__form" id="search__form">
+
+                <div class="input__container " style="position: relative;">
+                    <input class="form-control <% if (error) { %>is-invalid"<% } %>" 
+                        id="search_input" type="search" name="keyword" 
+                        placeholder="Título, autor, año..." aria-label="Search" 
+                    autocomplete="off">
+                    <% if (error) { %>
+                        <p style="color: red;position:absolute;bottom:-3rem;">
+                            <%=error%>
+                        </p>
+                    <% } %>
+                </div>
+
+
                 <button type="submit" class="form__btn btn btn-primary">
                     Buscar!
                 </button>
+
+
+                
             </form>
         </div>
        
@@ -31,6 +47,29 @@
 
 
 <script>
+
+    const $btn = document.querySelector(".form__btn");
+    const $form = document.getElementById("search__form");
+    const $loaderBtn = `<span class="spinner-border spinner-border-sm" aria-hidden="true"></span><span role="status">Loading...</span>`
+
+    // Agregar loader al botón
+    $form.addEventListener("submit", (e) => {
+        $btn.innerHTML = "";
+        $btn.classList.add("disabled")
+        $btn.insertAdjacentHTML("afterbegin", $loaderBtn);
+    })
+    
+
+    window.addEventListener('pageshow', function(event) {
+        // Verificar si la página se está mostrando desde la caché del navegador
+        if (event.persisted) {
+            // Restaurar el estado del botón después de volver atrás
+            $btn.innerHTML = "Buscar";
+            $btn.classList.remove("disabled");
+        }
+    });
+
+    // Generar background dinámicamente al cargarse la página
     window.onload = () => {
         const container = document.querySelector(".background")
         const numColumns = Math.ceil(window.innerWidth / 80);
@@ -44,6 +83,5 @@
             container.appendChild(div);
         }
     }
-    
 
 </script>
