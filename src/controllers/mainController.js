@@ -52,7 +52,7 @@ module.exports = {
                     totalItems: result.totalItems,
                     showingItems: result.items.length
                 },
-                title: keyword + " | Resultados | ",
+                title: keyword + " | Resultados",
                 keyword,
                 styles: ["/styles/books.css"],
                 layout: "layouts/main"
