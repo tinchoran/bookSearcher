@@ -33,3 +33,62 @@
     width: 2rem;
     height: auto;
 }
+
+
+/* --- RESPONSIVE DESIGN --- */
+@media (max-width: 576px) {
+    .footer{
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+    }
+
+    .footer__column:nth-child(3), .footer__column:nth-child(1){
+        justify-content: center;
+    }
+
+    .footer__column:nth-child(2){
+        order: 3;
+    }
+}
+
+
+@media (min-width: 576px) and (max-width: 767px) {
+    .footer{
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+    }
+
+    .footer__column:nth-child(3), .footer__column:nth-child(1){
+        justify-content: center;
+    }
+
+    .footer__column:nth-child(2){
+        order: 3;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    .footer{
+        display: flex;
+        flex-direction: column;
+        gap: 3rem;
+    }
+
+    .footer__column:nth-child(3), .footer__column:nth-child(1){
+        justify-content: center;
+    }
+
+    .footer__column:nth-child(2){
+        order: 3;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    /* Estilos para dispositivos grandes */
+}
+
+@media (min-width: 1200px) {
+    /* Estilos para dispositivos extra grandes */
+}

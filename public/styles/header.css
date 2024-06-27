@@ -11,7 +11,51 @@
 .navbar-brand{
     transition: .5s;
 }
-
+.nav-link{
+    transition: .5s;
+    font-size: 1.2rem;
+}
 .navbar-brand:hover{
     color: grey;
+}
+.nav-link:hover{
+    color: grey;
+}
+
+.navbar__items{
+    display: flex;
+    justify-content: right;
+    gap: 3rem;
+    padding: 0 1rem 0 0;
+} 
+
+
+
+@media (max-width: 576px) {
+    .navbar__items{
+        flex-direction: column;
+        padding: 1rem 0;
+        gap: 1rem;
+    }
+}
+
+
+@media (min-width: 576px) and (max-width: 767px) {
+    .navbar__items{
+        flex-direction: column;
+        padding: 1rem 0;
+        gap: 1rem;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+    /* Estilos para dispositivos medianos */
+}
+
+@media (min-width: 992px) and (max-width: 1199px) {
+    /* Estilos para dispositivos grandes */
+}
+
+@media (min-width: 1200px) {
+    /* Estilos para dispositivos extra grandes */
 }
