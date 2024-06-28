@@ -9,7 +9,7 @@ const port = process.env.PORT || 3009;
 const router = require("./src/routes/main.routes");
 const expressEjsLayouts = require("express-ejs-layouts");
 
-app.use(express.static("public"))
+app.use(express.static(path.resolve(__dirname, "./public")));
 
 app.set("view engine", "ejs");
 app.set("views", path.resolve(__dirname, "./src/views"))
