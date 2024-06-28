@@ -18,8 +18,18 @@
                     <div class="cell">
                         <div class="card">
                             <picture class="card__img-container">
-                                <% if (book.volumeInfo.imageLinks && book.volumeInfo.imageLinks.smallThumbnail) { %>
-                                    <img src='<%=book.volumeInfo.imageLinks.smallThumbnail%>' class="card__img" alt="Imagen del libro <%=book.volumeInfo.title%>" loading="lazy">
+                                <% 
+                                    var img_url = '';
+                                    if(book.volumeInfo.imageLinks){
+                                        if(book.volumeInfo.imageLinks.smallThumbnail){
+                                            img_url = book.volumeInfo.imageLinks.smallThumbnail;
+                                        } else if(book.volumeInfo.imageLinks.thumbnail){
+                                            img_url = book.volumeInfo.imageLinks.thumbnail;
+                                        };
+                                    };
+                                %>
+                                <% if (img_url) { %>
+                                    <img src='<%=img_url%>' class="card__img" alt="Imagen del libro <%=book.volumeInfo.title%>" loading="lazy">
                                 <% } else {%>
                                     <img src="/img/img_placeholder.png" alt="Imagen no encontrada" class="card__img" loading="lazy">
                                 <% } %>
