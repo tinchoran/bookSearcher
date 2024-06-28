@@ -22,9 +22,9 @@
                                     var img_url = '';
                                     if(book.volumeInfo.imageLinks){
                                         if(book.volumeInfo.imageLinks.smallThumbnail){
-                                            img_url = book.volumeInfo.imageLinks.smallThumbnail;
+                                            img_url = book.volumeInfo.imageLinks.smallThumbnail.replace('http://', 'https://');
                                         } else if(book.volumeInfo.imageLinks.thumbnail){
-                                            img_url = book.volumeInfo.imageLinks.thumbnail;
+                                            img_url = book.volumeInfo.imageLinks.thumbnail.replace('http://', 'https://');
                                         };
                                     };
                                 %>
